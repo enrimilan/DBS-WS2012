@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Datenbanksysteme - VL 181.186 (4.0)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="http://www.dbai.tuwien.ac.at/_resources/tucs/styles/rendering-all.css" media="all" type="text/css">
+    <link rel="stylesheet" href="http://www.dbai.tuwien.ac.at/_resources/tucs/styles/rendering-print.css" media="print" type="text/css">
+    <style type="text/css">
+        .tcenter
+        {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .table1
+        {
+            border-collapse: collapse;
+        }
+        .table1 th
+        {
+            border-width: 1px 1px 1px 1px;
+            padding: 1px 1px 1px 1px;
+            border-style: inset inset inset inset;
+            border-color: black black black black;
+        }
+        .table1 td
+        {
+            border-width: 1px 1px 1px 1px;
+            padding: 1px 1px 1px 1px;
+            border-style: inset inset inset inset;
+            border-color: black black black black;
+        }
+    </style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script><script src="https://www.informatik.tuwien.ac.at/schluesseltechnologie-assets/pageflip.js" type="text/javascript"></script></head>
+<body>
+    <div id="tucsWrap">
+        <a name="top"></a>
+        <div id="tucsHeader">
+            <p class="tucsSkip">
+                <a href="#content">Skip to Content</a></p>
+            <div id="tucsBanner">
+                <img src="http://www.dbai.tuwien.ac.at/_resources/tucs/images/bgbanner.png" usemap="#tucsBannerMap" alt="">
+                <map name="tucsBannerMap" id="tucsbannermap">
+                    <area shape="rect" coords="58,15,105,62" alt="TU Wien" href="http://www.tuwien.ac.at/">
+                    <area shape="rect" coords="111,15,158,63" alt="FakultÃ¤t fÃ¼r Informatik" href="http://www.informatik.tuwien.ac.at/">
+                    <area shape="rect" coords="167,15,269,62" alt="DBAI" href="http://www.dbai.tuwien.ac.at/">
+                    <area shape="rect" coords="468,44,666,93" alt="Database and Artificial Intelligence Group"
+                        href="http://www.dbai.tuwien.ac.at/">
+                </map>
+            </div>
+            <div id="tucsNav">
+                <span class="tucsSkip">Top-level Navigation:</span>
+                <ul id="tucsMain">
+                    <li><a href="http://dbai.tuwien.ac.at/staff/index.html">Staff</a></li>
+                    <li class="tucsCurrent"><a href="http://dbai.tuwien.ac.at/education/">Education</a></li>
+                    <li><a href="http://dbai.tuwien.ac.at/research/index.html">research</a></li>
+                    <li><a href="http://dbai.tuwien.ac.at/address/index.html">Contact</a></li>
+                    <li class="tucsLast"><a href="http://dbai.tuwien.ac.at/service/index.html">Services</a></li>
+                </ul>
+                <span class="tucsSkip">Current-level Navigation:</span>
+                <ul id="tucsSub">
+                    <li><a href="http://dbai.tuwien.ac.at/education/dbs/current/index.html">Vorlesungsteil</a></li>
+                    <li class="tucsCurrent">Übungsteil</li>
+                </ul>
+            </div>
+            <p id="tucsPath">
+                <span class="tucsSkip">Path:</span> <a href="http://dbai.tuwien.ac.at/index.html">DBAI</a>
+                &gt; <a href="http://dbai.tuwien.ac.at/education/">Education</a> &gt; <a href="http://dbai.tuwien.ac.at/education/dbs">
+                    Datenbanksysteme</a> &gt; <a href="http://dbai.tuwien.ac.at/education/dbs/current/uebung.html">
+                        Übung</a> &gt; Beispiel 3
+            </p>
+            <p id="tucsTools">
+                <span class="tucsSkip">Tools:</span> <a href="#" onclick="window.print(); return false">
+                    Drucken</a>
+            </p>
+            <hr class="tucsSkip">
+        </div>
+        <a name="content"></a>
+        <div id="tucsContent">
+            <!-- CONTENT START -->
+
+<h1>Datenbanksysteme (VU 4.0, 184.686)<br/>
+&Uuml;bungsteil, WS 2012/2013</h1>		
+<br/>
+
+<h1>Beispiel 3</h1>
+
+<p>Basierend auf der im vorigen Übungsbeispiel beschriebenen Datenbank sollen im ersten Teil komplexere Anfragen formuliert werden. Im zweiten und dritten Teil werden mit Hilfe von Java zuerst Concurrency und danach Prozeduren behandelt.</p>
+
+<p>Sie k&ouml;nnen für dieses Übungsbeispiel entweder ihre eigene L&ouml;sung von Beispiel 2 weiterverwenden oder die Musterl&ouml;sung als Basis f&uuml;r diese Aufgabe verwenden. Die Musterl&ouml;sung wird allerdings erst nach Ablauf der Abgabegespr&auml;che zu Beispiel 2 auf der &Uuml;bungsseite der Lehrveranstaltung ver&ouml;ffentlicht.</p>
+
+<h2>Teil 1: Komplexe Abfragen</h2>
+
+<p>L&ouml;sen Sie die folgenden Probleme mittels SQL:</p>
+
+<ol>
+	<li>Geben Sie ID, Rufname sowie die ID und den Nachnamen des Leiters jener Mannschaften aus, die bereits mit allen Bergefahrzeugen bei Eins&auml;tzen waren.</li>
+	
+	<li>W&auml;hlen Sie per Hand einen Dienstgrad aus, der anderen Dienstgraden untergeordnet ist. Schreiben Sie eine Anfrage, die diesen Dienstgrad ausgibt, sowie rekursiv alle &uuml;bergeordneten Dienstgrade. Geben Sie f&uuml;r jeden Dienstgrad die ID, Beschreibung sowie das zugeh&ouml;rige Gehalt und den Gehaltsunterschied zum n&auml;chstniedrigen Dienstgrad aus. Sollte es keinen niedrigeren Dienstgrad geben, soll der Inhalt der Spalte 0 sein. Passen Sie die Tupel in Ihrer Datenbank so an, dass es zu der von Ihnen ausgew&auml;hlten Kategorie mindestens zwei Ebenen &uuml;bergeordneter Kategorien gibt.</li>
+	
+	<li>Geben Sie die ID, Vor- und Nachname sowie Anzahl der Berichte der Personen aus, die an nicht mehr als drei Eins&auml;tzen teilgenommen haben und gleichzeitig die wenigsten Berichte verfasst haben. Sortieren Sie das Ergebnis nach der Anzahl der erstellten Berichte absteigend. [Hinweis nach R&uuml;ckfragen: Da maximal ein Ergebnis zur&uuml;ckgeliefert wird, ist das Sortieren nicht n&ouml;tig!] Vergessen Sie nicht darauf, dass im Falle, dass noch keine Berichte erstellt wurden auch die Personen ausgegeben werden, die keine Berichte verfasst haben.</li>
+</ol>
+
+<p>Passen Sie gegebenenfalls Ihre Testdaten (<code>insert.sql</code>) an, damit die Abfragen  Ergebnisse liefern. Stellen Sie insbesondere für die zweite Abfrage sicher, dass Ihre Daten keine Zyklen bei den Dienstgraden enthalten.</p>
+
+<h2>Hinweise zu Teil 2 und 3</h2>
+ 
+<p>Sie finden hier mehrere ZIP-Archive mit Java-Dateien (wahlweise als NetBeans- oder Eclipse-Projekt oder auch als Version für die Bearbeitung ohne IDE), die wir Ihnen als  Vorlage zur Verf&uuml;gung stellen. Sie k&ouml;nnen diese Dateien in jedem beliebigen Editor bearbeiten und die von Ihnen erstellten L&ouml;sungen sowohl zu Hause als auch auf dem &Uuml;bungsserver (bordo.dbai.tuwien.ac.at) testen. Stellen Sie aber jedenfalls sicher, dass Ihre endgültige Lösung auf dem &Uuml;bungsserver korrekt ausgeführt wird, um mögliche Punkteabzüge zu vermeiden!</p>
+
+<ul>
+	<li><a href="vorlage-eclipse-v2.zip">Vorlage Eclipse</a></li>
+	<li><a href="vorlage-netbeans-v2.zip">Vorlage NetBeans</a></li>
+	<li><a href="vorlage-plain-v2.zip">Vorlage (ohne IDE-Projekt)</a></li>
+</ul>
+
+<p>Beachten Sie bitte, dass die vorgegebenen Codezeilen, die markiert sind durch einen Kommentarblock (&ldquo;Vorgegebener Codeteil&rdquo;) und geschlossen werden durch eine Kommentarzeile aus Hashtags (#), nicht ver&auml;ndert werden sollten. Wenn Sie ihre eigene L&ouml;sung von Beispiel 2 weiterverwenden, kann es passieren, dass aufgrund anderer Namensgebung (f&uuml;r Tabellen und/oder Attribute) kleine Adaptierungen vorgenommen werden m&uuml;ssen.</p>
+
+<h2>Teil 2: Java und Concurrency</h3>
+
+<p>In diesem Teil zum Thema Concurrency werden zwei Übungsszenarien betrachtet (<code>Szenario1.java</code>, <code>Szenario2.java</code>). Die Szenarien sind so angelegt, dass es jeweils eine bereits existierende Transaktion gibt, die Ihnen von uns zur Verf&uuml;gung gestellt wird, und eine die von Ihnen zu erg&auml;nzen ist.</p>
+
+<p>Der Gro&szlig;teil des Codes ist bereits vorgegeben. Sie m&uuml;ssen nur die Methode <code>runTransactionA()</code> vervollst&auml;ndigen, indem sie den in der Vorlage bereitgestellten Code erg&auml;nzen. Die bereitgestellte Methode <code>runTransactionB()</code> dient zur &Uuml;berpr&uuml;fung der Funktionalit&auml;t und erzeugt bei Wahl des falschen Isolation-Levels ein Fehlverhalten.</p>
+
+<p>Die Parameter der Szenarien 1 und 2 sind jeweils die folgenden:</p>
+
+<ol>
+	<li>"a" oder "b" f&uuml;r die Wahl der jeweiligen Transaktion</span></li>
+	<li>Servername</li>
+	<li>Port-Nummer</li>
+	<li>Datenbank-Name</li>
+	<li>Username (optional)</li>
+	<li>Passwort (optional)</li>
+</ol>
+
+<h3>Helfende Hinweise</h3>
+
+<p>Zum vereinfachten Testen haben wir Ihnen ein ant-Skript zur Verf&uuml;gung gestellt (<code>build.xml</code>). Wenn Sie Ihre Verbindungs- und Benutzerdaten in diesem Skript hinterlegen, m&uuml;ssen Sie nur mehr die folgenden Aufrufe benutzen, um die Programme zu starten:</p>
+
+<ol>
+	<li><span><code>ant run-szenario1-a</code> (f&uuml;r Ihre eigene Implementierung von
+		Szenario 1)</span></li>
+	<li><span><code>ant run-szenario1-b</code> (f&uuml;r die bereitgestellte Transaktion
+		zu Szenario 1)</span></li>
+	<li><span><code>ant run-szenario2-a</code> (f&uuml;r Ihre eigene Implementierung von
+		Szenario 2)</span></li>
+	<li><span><code>ant run-szenario2-b</code> (f&uuml;r die bereitgestellte Transaktion
+		zu Szenario 2)</span></li>
+</ol>
+
+<p>F&uuml;r einen Test &ouml;ffnen Sie am besten zwei Konsolenfenster. Im ersten Fenster rufen Sie zuerst Ihre eigene Implementierung auf (also z.B. mittels des Befehls &ldquo;<code>ant run-szenario1-a</code>&rdquo;) und im zweiten Fenster die von uns bereitgestellte zugeh&ouml;rige Transaktion (z.B. &ldquo;<code>ant run-szenario1-b</code>&rdquo;).</p>
+
+<p>Sie sollten nun zwei Konsolenfenster sehen, die beide auf einen Befehl warten. Wenn Sie im Fenster mit der Transaktion A die Eingabetaste dr&uuml;cken, startet der von Ihnen programmierte Ablauf und sollte die erste Ausgabe anzeigen. Danach starten Sie Transaktion B ebenfalls mit der Eingabetaste. Die Transaktion B ver&auml;ndert nun den Datenbestand in der Datenbank. Wenn Sie nun wieder im anderen Konsolenfenster mit der Transaktion A die Enter-Taste bet&auml;tigen, sollte im Erfolgsfall die korrekte zweite Ausgabe Ihres Programms erscheinen.</p>
+
+<p>&Uuml;berpr&uuml;fen Sie nun sorgf&auml;ltig, ob sich Ihr Programm auch wirklich der Spezifikation entsprechend verh&auml;lt und keine unerw&uuml;nschten Ergebnisse durch die Transaktion B entstehen. Durch eine andere Reihenfolge beim Dr&uuml;cken der Enter-Taste in den verschiedenen Programmen k&ouml;nnen Sie nat&uuml;rlich auch andere Ablaufmuster und Verschachtelungen der Transaktionen simulieren und testen.</p>
+
+<p>Für eine schnelle Übersicht über das Setzen von Isolation Levels via JDBC bietet sich das entsprechende <a href="http://docs.oracle.com/javase/tutorial/jdbc/basics/transactions.html#transactions_data_integrity">Java Tutorial</a> an. In der entsprechenden <a href="http://www.postgresql.org/docs/9.1/static/transaction-iso.html">PostgreSQL Dokumentation</a> findet man eine Übersicht über die in PostgreSQL tatsächlich unterstützen Levels.
+
+<h3>Szenario 1</h3>
+
+<p>F&uuml;r die Erstellung des j&auml;hrlichen Jahresr&uuml;ckblicks durch den Landesfeuerwehrverband, m&uuml;ssen die einzelnen Feuerwehren Zahlen und Fakten liefern. F&uuml;r die Erf&uuml;llung dieser Aufgabe ben&ouml;tigt der Feuerwehrkommandant folgende Informationen:</p>
+
+<ol>
+	<li>Das Durchschnittsalter von Personen, welche an den letzten Wettk&auml;mpfen teilgenommen haben,</li>
+	<li>sowie das allgemeine Durchschnittsalter der Personen und</li>
+	<li>das Verh&auml;ltnis dieser beiden Werte</li>
+</ol>
+
+<p>Diese Zahlenwerte sollen in einer Transaktion ermittelt werden. Bez&uuml;glich der Wettk&auml;mpfe h&auml;lt der Feuerwehrkommandant die letzten 3 Wettk&auml;mpfe f&uuml;r ausreichend, also jene die zuletzt stattgefunden haben.</p>
+
+<p>Da diese Statistiken aus der Sicht der Feuerwehrkommandanten nur eine untergeordnete Rolle spielen, ist es ihm ein dringendes Anliegen, dass der Echtzeitbetrieb so wenig wie m&ouml;glich belastet wird. Daher sind etwaige minimale Abweichungen bei diesen Statistiken irrelevant.</p>
+
+<p>Beachten Sie diese Anforderungen und den m&ouml;glichen Zusammenhang der beiden Abfragen. &Uuml;berlegen Sie sich, welches Isolation-Level hierf&uuml;r ausreicht und begr&uuml;nden Sie ihre Entscheidung beim Abgabegespr&auml;ch.</p>
+
+<p>Ermitteln Sie die geforderten Informationen in den bereitgestellten Codebl&ouml;cken der Transaktion A in Szenario 1. Mit der zur Verf&uuml;gung gestellten Transaktion B k&ouml;nnen Sie verschiedenste Verschachtelungen der einzelnen Befehle durchspielen und so gewollte, oder aber auch ungewollte Effekte des gew&auml;hlten Isolation-Levels sehen.</p>
+
+<h3>Szenario 2</h3>
+
+<p>F&uuml;r Belobigungen will der Feuerwehrkommandant regelm&auml;&szlig;ig abfragen, an welchen Eins&auml;tzen eine bestimmte Mannschaft teilgenommen hat (Typ, Ort, Betroffene Personen) und das Ergebnis soll nach Anzahl der betroffenen Personen absteigend sortiert werden. F&uuml;r unsere Tests verwenden Sie bitte die Mannschaft mit der ID 10 in ihrer Transaktion. Bitte stellen Sie sicher, dass es auch in Ihren Testdaten eine Mannschaft mit der ID 10 gibt, da ansonsten das Ergebnis beim Abgabegespr&auml;ch nicht vern&uuml;nftig &uuml;berpr&uuml;ft werden kann.</p>
+
+<p>In der gleichen Transaktion soll auch die Einsatzstatistik ausgelesen werden. Die Statistik soll beinhalten, wie viele Ereignisse es von jedem Typ (Brand, Verkehrsunfall, Hochwasser, Sonstiges) ingesamt bisher gab und wie viele Personen von dem jeweiligen Ereignistyp in Summe betroffen waren. Diese Ausgabe soll ebenfalls nach Typ aufsteigend sortiert werden. Sie m&uuml;ssen Ereignistypen, die nicht verwendet wurden, nicht ber&uuml;cksichtigen.</p>
+
+<p>Da der Kommandant die Daten gerne mobil abrufen m&ouml;chte, soll die zu &uuml;bertragende Datenmenge m&ouml;glichst gering sein, d.h. es ist notwendig, dass von der Datenbank immer nur die jeweils notwendigen Tupel ausgelesen werden und auch alle Berechnungen und Sortierungen sollen von der Datenbank &uuml;bernommen werden. Ihre Java-Anwendung soll die abgerufenen Daten nur mehr anzeigen.</p>
+
+<p> Der Kommandant w&uuml;nscht auch ausdr&uuml;cklich, dass es nicht m&ouml;glich sein soll, dass Ver&auml;nderungen in anderen Tabellen w&auml;hrend der Laufzeit der Transaktion die Daten verf&auml;lschen k&ouml;nnen. Das hei&szlig;t, dass die Daten aus der ersten Abfrage unbedingt konsistent mit denen aus der zweiten Abfrage sein m&uuml;ssen.</p>
+
+<p>Als Ausgabe soll Ihr Programm eine Liste der Eins&auml;tze ausgeben, die der Anforderung des Kommandanten entspricht. In einer weiteren Liste sollen die Einsatzsstatistik ausgegeben werden. Achten Sie darauf, dass sie unerw&uuml;nschtes Verhalten vermeiden, aber die Datenbank soll nicht durch ein zu restriktives Isolation-Level unn&ouml;tig blockiert werden.</p>
+
+<p>Setzen Sie nun wieder die geforderten Kommandos in die Codebl&ouml;cke von Transaktion A in Szenario 2. Auch in diesem Szenario gibt es wieder eine vorgegebene Transaktion B, welche gewisse Effekte bei der parallelen Ausf&uuml;hrung hervorbringt.</p>
+			
+<h3>Hinweise zur Abgabe</h3>
+			
+<p>Sie m&uuml;ssen beim Kontrollgespr&auml;ch Ihr Vorgehen bei der Erstellung und auch die Funktionsweise des Programms erkl&auml;ren k&ouml;nnen. Sie sollten in der Lage sein, zu erkl&auml;ren wie sich die Wahl des Isolation-Levels auf das Programmverhalten auswirkt. Dazu ist ein gewisses Basiswissen im Bereich Concurrency erforderlich, zum Beispiel das Verst&auml;ndnis von Transaktionen (sprich z.B. ACID), die Charakteristika von Isolation-Levels, oder welche Probleme die einzelnen Isolation-Levels beheben (z.B. Dirty Read).</p>
+
+<h2>Teil 3: Java und Prozeduren</h2>
+
+<p>In der dritten Datei (<code>Szenario3.java</code>) sollen Sie die Methode <code>inflationsAusgleich(double inflation)</code> entsprechend der folgenden Angabe implementieren. Sie k&ouml;nnen dieses Programm entweder mittels der Kommandozeilen-Argumente oder wiederum direkt mittels des ant-Skripts (<code>ant run-szenario3</code>) starten.</p>
+
+<p>Die Argumente f&uuml;r den Aufruf dieses Szenarios sind die folgenden:</p>
+
+<ol>
+	<li><span>Servername</span></li>
+	<li><span>Port-Nummer</span></li>
+	<li><span>Datenbank-Name</span></li>
+	<li><span>Username (optional)</span></li>
+	<li><span>Passwort (optional)</span></li>
+</ol>
+
+<h3>Szenario 3</h3>
+
+<p>F&uuml;r die bessere Verwaltung der Geh&auml;lter der einzelnen Mitarbeiter soll eine Java-Methode <code>inflationsAusgleich(double inflation)</code> erstellt werden. Der Parameter <code>inflation</code> gibt dabei die aktuelle Inflationsrate an. Eine Inflationsrate von 0.05 w&uuml;rde bedeuten, dass die Inflation 5% betr&auml;gt.</p>
+
+<p>Die folgenden Aktionen sollen von der Prozedur ausgef&uuml;hrt werden:</p>
+
+<ol>
+	<li>Benutzen Sie die Stored Procedure <code>p_erhoehe_dienstgrad(integer)</code> aus Beispiel 2, um alle Personen zu bef&ouml;rdern, die bereits zwei oder mehr  Jahre im aktuellen Dienstgrad sind.</li>
+		
+	<li>Erstellen Sie ein Prepared Statement zum Setzen des Gehalts eines bestimmten,
+		existierenden Dienstgrades.</li>
+		
+	<li>Benutzen sie das oben beschriebene Prepared Statement um f&uuml;r jeden Dienstgrad
+		die folgenden &Auml;nderungen durchzuf&uuml;hren:
+		<ul>
+			<li><span>Geh&auml;lter unter 750 Euro sollen um die 2.5-fache Inflation erh&ouml;ht
+				werden.</span></li>
+			<li><span>Geh&auml;lter unter 1250 Euro sollen um die 2.0-fache Inflation erh&ouml;ht
+				werden.</span></li>
+			<li><span>Geh&auml;lter unter 1750 Euro sollen um die 1.5-fache Inflation erh&ouml;ht
+				werden.</span></li>
+			<li><span>Geh&auml;lter &uuml;ber 5000 Euro sollen um die 0.5-fache Inflation erh&ouml;ht
+				werden.</span></li>
+			<li><span>Alle andere Geh&auml;lter sollen um die einfache Inflationsrate erh&ouml;ht
+				werden.</span></li>
+		</ul>
+	</li>
+	
+	<li>Geben Sie zum Abschluss alle Personen mit ihrer ID, dem Vor- und Nachnamen sowie dem aktuellen Gehaltsanspruch aus. Der Anspruch berechnet sich aus der Summe des dem Dienstgrad zugewiesenen Gehalts und den Bonuszahlungen f&uuml;r die jeweilige Person. Benutzen Sie f&uuml;r die Berechnung der Bonuszahlungen die von Ihnen erstellte Funktion <code>f_bonus(int)</code>. Nat&uuml;rlich soll f&uuml;r die Berechnung bereits das um den Inflationsausgleich erh&ouml;hte Gehalt herangezogen werden.</li>
+</ol>
+
+
+<h2>Abgabe</h2>
+				
+<p>F&uuml;r das Beispiel 3 sind folgende Dateien abzugeben:</p>
+<ul>
+	<li><span><code>create.sql</code> (aus Beispiel 2 oder Musterlösung)</span></li>
+	<li><span><code>drop.sql</code> (aus Beispiel 2 oder Musterlösung)</span></li>
+	<li><span><code>insert.sql</code> (aus Beispiel 2 oder Musterlösung)</span></li>
+	<li><span><code>create-plpgsql.sql</code> (aus Beispiel 2 oder Musterlösung)<span></li>
+	<li><span><code>drop-plpgsql.sql</code> (aus Beispiel 2 oder Musterlösung)<span></li>
+	<li><span><code>queries.sql</code></span></li>
+	<li><span><code>Szenario1.java</code></span></li>
+	<li><span><code>Szenario2.java</code></span></li>
+	<li><span><code>Szenario3.java</code></span></li>
+</ul>
+
+<p>Alle sonstigen Dateien (z.B. <code>DBConnector.java</code> und das Build-Script) sollen nicht Teil der Abgabe sein.</p>
+
+<p>F&uuml;hren Sie keine &Auml;nderung an der "Testumgebung" aus Teil 2 und 3 (<code>DBConnector.java</code>, Build-Script, Main-Methoden, usw.) durch, da ansonsten ihre Abgabe im Rahmen des Abgabegespr&auml;chs m&ouml;glicherweise nicht ausgef&uuml;hrt werden kann.</p>
+
+<p>Die aufgez&auml;hlten Dateien sind in einer ZIP-Datei <code>beispiel3.zip</code> bis sp&auml;testen <strong>02.12.2012</strong> um <strong>23:59</strong> im <a href="http://minteka.dbai.tuwien.ac.at/coursemanager/">CourseManager</a> abzugeben. Es wird stets die zuletzt hochgeladene Version Ihrer L&ouml;sung gewertet.</p>
+
+<p>Achten Sie darauf, dass der Name jeder dieser abzugebenen Dateien so lautet wie oben beschrieben. Erstellen Sie keine Ordner innerhalb der ZIP-Datei.</span></p>
+
+<h3>Abgabegespr&auml;che</h3>
+
+<p>Die Verteilung der Punkte erfolgt nach folgendem Schl&uuml;ssel:</p>
+
+<ul>
+	<li>Teil 1 (<code>queries.sql</code>): 4 Punkte</li>
+	<li>Teil 2 (<code>Szenario1.java</code>, <code>Szenario2.java</code>): 7 Punkte</li>
+	<li>Teil 3 (<code>Szenario3.java</code>): 4 Punkte</li>
+</ul>
+
+<p>Im Rahmen des Kontrollgespr&auml;ches wird nicht nur die Korrektheit, sondern vor allem das Verst&auml;ndnis der Konzepte &uuml;berpr&uuml;ft. Durch die &Uuml;bung sollen sowohl Ihre praktische Probleml&ouml;sungskompetenz als auch das theoretische Wissen &uuml;ber Datenbanksysteme gef&ouml;rdert werden. Sie m&uuml;ssen daher bei den Abgabegespr&auml;chen in der Lage sein, nicht nur Ihre Beispiele zu erkl&auml;ren, sondern ebenfalls zeigen, dass Sie die bisher in der Vorlesung behandelte Theorie zu diesen Beispielen ausreichend verstanden haben. Dies soll Ihnen die Vorbereitung f&uuml;r die Pr&uuml;fung erleichtern und so k&ouml;nnen Sie Ihr Wissen w&auml;hrend der Abgabegespr&auml;che selbst testen und gegebenenfalls vertiefen.</p>
+
+<p>Die volle Punktezahl gibt es nur, wenn die Beispiele korrekt gel&ouml;st wurden und die L&ouml;sung einwandfrei erkl&auml;rt werden kann. Nicht selbstst&auml;ndig gel&ouml;ste Abgaben werden mit 0 Punkten bewertet!</p>
+
+<p>Erscheinen Sie in Ihrem eigenen Interesse <strong>p&uuml;nktlich</strong> zum Abgabegespr&auml;ch, da andernfalls nicht garantiert werden kann, dass Ihre gesamte L&ouml;sung in der
+verbleibenden Zeit beurteilt werden kann.</p>
+
+<p>Bringen Sie bitte Ihren Studentenausweis zur Abgabe mit. Eine Abgabe ohne Ausweis ist nicht möglich.</p>
+
+<h3>Hinweise zur Verwendung von psql</h3>
+
+<p>Folgende Befehle k&ouml;nnen f&uuml;r Ihre Arbeit mit der interaktiven SQL-Shell psql von PostgreSQL 9.1 hilfreich sein:</p>
+
+<ol>
+	<li><span>\?: Listet alle psql-internen Befehle samt Erkl&auml;rung auf.</span></li>
+	<li><span>\i &lt;dateiname&gt;: F&uuml;hrt das Skript &lt;dateiname&gt; aus. Beispiel:
+		\i create.sql</span></li>
+	<li><span>\o &lt;dateiname&gt;: Lenkt die Ausgabe in eine Datei mit dem Namen &lt;dateiname&gt;um.
+		L&auml;sst man den Parameter &lt;dateiname&gt; weg, so wird dieses Verhalten wieder
+		abgestellt. Beispiel: \o index.txt</span></li>
+</ol>
+
+                <!-- CONTENT END -->
+                <div style="text-align: right;">
+Version 1.1 (2012-11-07): <br/>Kleine Klarstellung (durch "[Hinweis" markiert)<br/>
+Version 1.2 (2012-11-16): <br/>&Auml;nderung an den Codevorlage-ZIPs (f&uuml;r Windows-Linebreaks)
+                </div>
+        </div>
+        <div id="tucsFooter">
+            <hr class="tucsSkip">
+            <p>
+                <a href="http://dbai.tuwien.ac.at/">Home</a> / <a href="http://dbai.tuwien.ac.at/address/">
+                    Kontakt</a> / <a href="mailto:webmaster@dbai.tuwien.ac.at">Webmaster</a> / Offenlegung
+                gemäß § 25 Mediengesetz: Inhaber der Website ist das Institut für Informationssysteme
+                an der Technischen Universität Wien, 1040 Wien. Die TU Wien distanziert sich von
+                den Inhalten aller extern gelinkten Seiten und übernimmt diesbezülich keine Haftung.
+                / <a href="http://www.tuwien.ac.at/impressum/disclaimer/" onclick="javascript:window.open('http://www.tuwien.ac.at/impressum/disclaimer/','d','width=680,height=500,scrollbars'); return false">
+                    Disclaimer</a>.
+            </p>
+        </div>
+        <a name="bottom"></a>
+    </div>
+</body>
+</html>

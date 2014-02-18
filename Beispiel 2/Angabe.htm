@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <title>Datenbanksysteme - VU 181.186 (4.0)</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link rel="stylesheet" href="/_resources/tucs/styles/rendering-all.css" media="all" type="text/css"/>
+<link rel="stylesheet" href="/_resources/tucs/styles/rendering-print.css" media="print" type="text/css"/>
+<!-- <title>(none)</title> -->
+
+ 
+    <style type="text/css">
+      .tcenter {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .table1 {
+        border-collapse: collapse;
+      }
+      .table1 th {
+        border-width: 1px 1px 1px 1px;
+        padding: 1px 1px 1px 1px;
+        border-style: inset inset inset inset;
+        border-color: black black black black;
+      }
+      .table1 td {
+        border-width: 1px 1px 1px 1px;
+        padding: 1px 1px 1px 1px;
+        border-style: inset inset inset inset;
+        border-color: black black black black;
+      }
+    </style>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script><script src="https://www.informatik.tuwien.ac.at/schluesseltechnologie-assets/pageflip.js" type="text/javascript"></script><script src="https://www.informatik.tuwien.ac.at/schluesseltechnologie-assets/overlay.js" type="text/javascript"></script></head>
+  <body>
+    <div id="tucsWrap">
+      <a name="top"></a>
+      <div id="tucsHeader">
+        <p class="tucsSkip"><a href="#content">Skip to Content</a></p>
+<div id="tucsBanner">
+  <img src="/_resources/tucs/images/bgbanner.png" usemap="#tucsBannerMap" alt=""/>
+  <map name="tucsBannerMap" id="tucsbannermap">
+	    <area shape="rect" coords="58,15,105,62" alt="TU Wien" href="http://www.tuwien.ac.at/"/>
+	    <area shape="rect" coords="111,15,158,63" alt="Fakult&auml;t für Informatik" href="http://www.informatik.tuwien.ac.at/"/>
+	    <area shape="rect" coords="167,15,269,62" alt="DBAI" href="http://www.dbai.tuwien.ac.at/"/>
+	    <area shape="rect" coords="468,44,666,93" alt="Database and Artificial Intelligence Group" href="http://www.dbai.tuwien.ac.at/"/>
+  </map>
+</div>
+
+
+        <div id="tucsNav">
+          <span class="tucsSkip">Top-level Navigation:</span>
+          <ul id="tucsMain">
+	    <li><a href="/staff/index.html">Staff</a></li>
+	    <li class="tucsCurrent"><a href="/education/">Education</a></li>
+	    <li><a href="/research/index.html">research</a></li>
+	    <li><a href="/address/index.html">Contact</a></li>
+	    <li class="tucsLast"><a href="/service/index.html">Services</a></li>
+          </ul>
+          <span class="tucsSkip">Current-level Navigation:</span>
+          <ul id="tucsSub">
+	    <li><a href="../index.html">Vorlesungsteil</a></li>
+	    <li class="tucsCurrent">&Uuml;bungsteil</li>
+          </ul>
+        </div>
+        <p id="tucsPath">
+          <span class="tucsSkip">Path:</span>
+          <a href="/index.html">DBAI</a> &gt;
+          <a href="/education/">Education</a> &gt;
+	  <a href="/education/dbs">Datenbanksysteme</a> &gt;
+	  <a href="/education/dbs/current/uebung.html">&Uuml;bung</a> &gt;
+	  Beispiel 2
+        </p>
+        <p id="tucsTools">
+          <span class="tucsSkip">Tools:</span>
+	  <a href="#" onclick="window.print(); return false">Drucken</a>
+        </p>
+	
+        <hr class="tucsSkip" />
+      </div>
+      <a name="content"></a>
+      <div id="tucsContent">
+	<!-- CONTENT START -->
+	
+<h1>Datenbanksysteme (VU 4.0, 184.686)<br>
+&Uuml;bungsteil, WS 2012/2013</h1>
+</br>
+            <h1>Beispiel 2</h1>
+			<!--<p><b>(10 Punkte)</b></p>-->
+			<p>F&uuml;r eine Berufsfeuerwehr soll eine Datenbank entwickelt werden. Im ersten Teil dieses &Uuml;bungsbeispiels wird die Datenbank mittels SQL erstellt. Im zweiten Teil wird die Datenbank mittels PL/pgSQL zur Modellierung komplexerer Zusammenh&auml;nge erweitert.</p>
+			
+			<h2>SQL Teil</h2>
+			
+            <p>Erstellen Sie f&uuml;r eine Berufsfeuerwehr eine Datenbank, die folgende Informationen
+               speichert:</p>
+            <ul>
+                <li>Die Mitglieder der Feuerwehr werden in Mannschaften zusammengefasst. F&uuml;r jede Person
+                    wird deren Vor- und Nachname sowie das Geburtsdatum gespeichert. F&uuml;r eine bessere
+                    Verwaltung soll auch das Beitrittsdatum gespeichert werden. Die Telefonnummer ist
+                    ebenfalls wichtig, um die Person erreichen zu k&ouml;nnen.
+                    <br />
+                    Jede Person hat exakt einen Dienstgrad, der hierarchisch gegliedert ist. Ein Dienstgrad
+                    kann mehrere direkt untergeordnete Dienstgrade haben, aber immer nur maximal einen
+                    &uuml;bergeordneten Dienstgrad. Bei einem Dienstgrad ist jeweils die Bezeichnung und
+                    das zugeh&ouml;rige Basisgehalt gespeichert. Es muss auch m&ouml;glich sein, zu erkennen,
+                    seit wann eine Person in diesem Dienstgrad eingeteilt ist. (Dieses Datum ist im
+                    Allgemeinen nicht identisch zum Eintrittsdatum.) </li>
+                <li>F&uuml;r jede Mannschaft wird eine Person als deren Leiter festgelegt. Zus&auml;tzlich muss
+                    auch der Rufname gespeichert werden, um diese Mannschaft &uuml;ber Funk schnell erreichen
+                    zu k&ouml;nnen. </li>
+                <li>Zus&auml;tzlich zu den Mannschaften gibt es auch Wettkampftruppen, die ebenfalls eine
+                    Gruppierung von Personen sind. Personen innerhalb der Truppe haben jeweils eine
+                    genaue Funktion, die als Beschreibung gespeichert werden soll.
+                    <br />
+                    Zu einer Wettkampftruppe muss gespeichert werden, wann diese gegr&uuml;ndet wurde und
+                    eine Beschreibung ihrer Kategorie. Zus&auml;tzlich wird noch hinterlegt, wie hoch die
+                    Sonderzahlung im Fall eines Wettbewerbs-Sieges ist.
+                    <br />
+                    Diese Wettkampftruppen absolvieren nun Wettk&auml;mpfe. Bei einem Wettkampf muss es m&ouml;glich
+                    sein, den Ort, den Veranstalter sowie die Kategoriebezeichnung zu speichern. Nat&uuml;rlich
+                    ist es auch wichtig, die Veranstaltungszeit (von, bis) sichern zu k&ouml;nnen und welche
+                    Wettkampftruppen mit welcher Platzierung an welchen Wettk&auml;mpfen teilgenommen haben.
+                </li>
+                <li>Es sollen auch Ereignisse in der Datenbank gespeichert werden k&ouml;nnen. Ein Ereignis
+                    hat einen bestimmten Typ ('Brand', 'Verkehrsunfall', 'Hochwasser' oder 'Sonstiges')
+                    und findet zu einem Zeitpunkt an einem Ort statt, wobei es wichtig ist, auch zu
+                    speichern, wie viele Personen betroffen sind. </li>
+                <li>Um zu einem Ereignis zu gelangen, gibt es Fahrzeuge. Diese werden in die Kategorien
+                    L&ouml;schen und Bergen eingeteilt, wobei ein Fahrzeug auch in beiden Kategorien oder
+                    in keiner Kategorie (z.B. Kommandofahrzeug) eingeteilt sein kann.
+                    <br />
+                    Bei allen Fahrzeugen ist die Anzahl der Sitzpl&auml;tze, Gewicht, Marke, Modell und das
+                    Baujahr bekannt. Bei L&ouml;schfahrzeugen ist auch bekannt, welches Hauptl&ouml;schmittel
+                    sie verwenden und welche Menge davon an Bord ist. Bei Bergefahrzeugen muss es m&ouml;glich
+                    sein, die maximale Zugleistung abrufen zu k&ouml;nnen und auslesen zu k&ouml;nnen, ob sie
+                    eine Hebevorrichtung besitzen. </li>
+                <li>Eins&auml;tze dienen zur Speicherung, welches Fahrzeug von welcher Mannschaft f&uuml;r welches
+                    Ereignis verwendet wurde. Der Entit&auml;tstyp &#8220;Einsatz&#8221; aus dem unten beigef&uuml;gten
+                    ER-Diagramm ist bereits die Aufl&ouml;sung dieser tern&auml;ren Beziehung.</li>
+                <li>Zum Abschluss m&uuml;ssen auch noch Berichte gespeichert werden. Ein Bericht wird f&uuml;r
+                    ein bestimmtes Ereignis von einer Person angefertigt. Diese Person muss nat&uuml;rlich
+                    an einem Einsatz f&uuml;r dieses Ereignis beteiligt gewesen sein. Ein Bericht ist identifiziert
+                    durch eine innerhalb des Ereignisses eindeutige Nummer.
+                    <br />
+                    Bei einem Bericht ist die Kurzbeschreibung und das Datum der Eintragung zu speichern.
+                </li>
+            </ul>
+            <p>
+                Sie finden nun im folgenden Bild ein ER-Diagramm, dass die grobe Struktur der Datenbank
+                abbildet, wobei Sie davon ausgehen k&ouml;nnen, dass die Abbildung den Sachverhalt als
+                auch alle Kardinalit&auml;ten bereits korrekt abdeckt. Ihre Aufgabe ist es nur mehr,
+                die korrekten CREATE-, INSERT- und DROP-Befehle zu erstellen, um alle vorhin genannten
+                Informationen verwalten zu k&ouml;nnen.
+                <br />
+                <br />
+                <strong>Wichtig</strong>
+                <br />
+                Treffen Sie geeignete Annahmen f&uuml;r die Schl&uuml;ssel und Fremdschl&uuml;ssel der einzelnen
+                Tabellen!
+            </p>
+            <p>
+                <img src="images/ERD_feuerwehr.png" alt="ER-Diagramm" width="550px" /></p>
+            <p>
+                Bei der &Uuml;berf&uuml;hrung in die CREATE-Anweisungen werden Sie feststellen, dass NULL-Werte
+                durch das ERD erlaubt sind. Beim Abgabegespr&auml;ch sollten Sie in der Lage sein, die
+                betroffene Tabelle zu nennen und Vorschl&auml;ge zu machen, wie man diese NULL-Werte
+                vermeiden kann. Es ist aber nicht notwendig, NULL-Werte bei den CREATE-Befehlen
+                zu vermeiden und die m&uuml;ndliche Erkl&auml;rung w&auml;hrend des Abgabegespr&auml;chs ist ausreichend.
+            </p>
+            <h2>PL/pgSQL Teil</h2>
+			
+             <h3>Trigger:</h3>
+            <p>
+                <ol>
+                    <li>Der Verfasser des Berichts zu einem Ereignis muss zum Datum der Eintragung des Berichts
+                        vollj&auml;hrig sein (>= 18 Jahre), sowie selbst am Einsatz beteiligt gewesen sein (mit
+                        der Mannschaft, in der er sich befindet). Schreiben Sie einen Trigger f&uuml;r die Tabelle
+                        Bericht, der diese beiden Bedingungen sicherstellt. </li>
+                    <li>Es macht nat&uuml;rlich Sinn, dass eine Mannschaft nur einmal zu einem bestimmten Ereignis
+                        fahren kann, genauso soll ein Fahrzeug bei einem bestimmten Ereignis nur einmal
+                        eingesetzt werden (= ein Eintrag in der Tabelle Einsatz). Beispielhaft ausgedr&uuml;ckt:<br />
+                        F&auml;hrt Mannschaft A mit dem Fahrzeug X zu einem Ereignis 1, dann soll Mannschaft
+                        A nicht mit einem anderen Fahrzeug zum gleichen Ereignis fahren d&uuml;rfen (die Mannschaft
+                        ist ja bereits vor Ort). Genauso soll verhindert werden, dass eine andere Mannschaft
+                        mit dem Fahrzeug X zu Ereignis 1 f&auml;hrt (es ist ja bereits Mannschaft A mit diesem
+                        Fahrzeug im Einsatz).
+                        <br />
+                        Schreiben Sie einen Trigger f&uuml;r die Tabelle Einsatz der dieses Verhalten garantiert.
+                    </li>
+                </ol>
+            </p>
+            <h3>Function:</h3>
+            <ol>
+                <li>Erstellen Sie eine Funktion <code>f_bonus</code>, welche als Parameter die ID einer
+                    Person erh&auml;lt. F&uuml;r gute Platzierungen in einem Wettbewerb erhalten die Wettkampftruppen-Mitglieder
+                    Bonuszahlungen. Im Falle eines Wettbewerbssieges werden 100% der f&uuml;r die Truppe
+                    festgelegten Bonuszahlung ausgesch&uuml;ttet. Ein zweiter Platz bringt 50% der Bonuszahlung
+                    und ein dritter Platz immerhin noch 25%. Alle anderen Platzierungen erhalten keinen
+                    Bonus f&uuml;r die Absolvierung des Wettbewerbs.
+                    <br />
+                    Die Funktion <code>f_bonus</code> soll nun f&uuml;r eine Person, anhand der von ihr in
+                    Wettkampftruppen bestrittenen Wettk&auml;mpfe, den Gesamtbonus nach dem obigen Schema
+                    berechnen und zur&uuml;ckliefern.<br />
+                    Hat eine Person gar keinen Wettkampf bestritten, oder wurde nie eine Platzierung
+                    innerhalb der ersten drei R&auml;nge erreicht, soll der Wert 0.0 zur&uuml;ckgeliefert werden.
+                    <br />
+                    Stellen Sie sicher, dass die &uuml;bergebene ID auch tats&auml;chlich existiert, andernfalls
+                    beenden Sie die Verarbeitung mit einer Exception samt passendem Hinweis. </li>
+            </ol>
+            <h3>Procedure:</h3>
+            <ol>
+                <li>Erstellen Sie eine Prozedur <code>p_erhoehe_dienstgrad</code>, welche als Parameter
+                    eine Zahl (Integer) erh&auml;lt. Diese Zahl beschreibt die Zeitspanne in Jahren, die
+                    vergehen muss, bevor eine Person zum n&auml;chsth&ouml;heren Dienstgrad aufsteigen kann.
+                    <br />
+                    Betrachten Sie f&uuml;r alle Personen, wie lange sich diese Person bereits in ihrem Dienstgrad
+                    befindet (Differenz zwischen dem aktuellen Datum und dem gespeicherten Wert der
+                    jeweiligen Person). Ist dieser Wert gr&ouml;&szlig;er oder gleich dem Wert des Parameters,
+                    dann steigt diese Person um einen Dienstgrad auf. Hat eine Person den h&ouml;chstm&ouml;glichen
+                    Dienstgrad erreicht, dann verbleibt sie nat&uuml;rlich in diesem.
+                    <br />
+                    Geben Sie die Vorname, Nachname und Bezeichnung des neuen als auch des alten Dienstgrades
+                    aus, bei all jenen Personen, die einen Dienstgrad aufgestiegen sind.
+                    <br />
+                    Stellen Sie sicher, dass es sich beim Parameter der Prozedur um einen positiven
+                    Wert handelt, andernfalls brechen Sie die Verarbeitung mit einer passenden Exception
+                    inklusive Fehlermeldung ab.</li></ol>
+					
+            <h2>Aufgabenstellung</h2>
+            <ol>
+                <li>
+                    <p>
+                        Leiten Sie aus dem ER-Diagramm die Relationen der Datenbank in 3. Normalform so
+                        ab, dass sie verbundtreu und abh&auml;ngigkeitstreu sind. Sie k&ouml;nnen die Ableitung der
+                        Relationen gleich unmittelbar in der geforderten Datei <code>create.sql</code> vornehmen und m&uuml;ssen KEIN explizites Dokument f&uuml;r das Relationenmodell erstellen.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Erstellen Sie eine Datei <code>create.sql</code>, in welcher die n&ouml;tigen CREATE-Befehle
+                        gespeichert werden, um die Relationen mittels SQL zu realisieren. Dabei sind folgende
+                        Punkte zu beachten:
+                        <ul>
+                            <li>W&auml;hlen Sie f&uuml;r Geldbetr&auml;ge keine Gleitkommatypen sondern z. B. NUMERIC mit zwei
+                                Nachkommastellen.</li>
+                            <li>Realisieren Sie die fortlaufende Nummerierung der "id"-Attribute von Fahrzeug und
+                                Mannschaft mit Hilfe von Sequences. Die Sequence f&uuml;r den Schl&uuml;ssel der Tabelle Mannschaft
+                                soll bei 10 beginnen und in Zehnerschritten erh&ouml;ht werden (d.h. 10, 20, 30, ...).
+                            </li>
+                            <li>Sollten zwischen zwei Tabellen zyklische FOREIGN KEY Beziehungen existieren, so
+                                achten Sie darauf, dass eine &Uuml;berpr&uuml;fung dieser FOREIGN KEYs erst zum Zeitpunkt
+                                eines COMMITs stattfindet. </li>
+                            <li>Verwenden Sie keine Umlaute f&uuml;r Bezeichnungen von Relationen, Attributen, etc.</li>
+                            <li>Stellen Sie die folgenden Sachverhalte durch geeignete CHECK-Bedingungen sicher:
+                                <ul>
+                                    <li>Das Gehalt, das f&uuml;r einen Dienstgrad ausgezahlt wird, muss gr&ouml;&szlig;er oder gleich 0
+                                        sein, d.h. es darf kein negatives Gehalt geben. </li>
+                                    <li>Der Typ eines Ereignisses muss aus der folgenden Liste an M&ouml;glichkeiten stammen:
+                                        'Brand', 'Verkehrsunfall', 'Hochwasser', 'Sonstiges'</li>
+                                    <li>Das Gr&uuml;ndungsdatum einer Wettkampftruppe muss entweder genau am aktuellen Tag (current_date)
+                                        liegen oder in der Vergangenheit.</li>
+                                    <li>Das Datum, seit wann eine Person einem gewissen Dienstgrad zugeteilt ist, muss gr&ouml;&szlig;er
+                                        oder gleich dem Eintrittsdatum der Person sein. </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Erstellen Sie eine weitere Datei <code>insert.sql</code>, welche die INSERT-Befehle
+                        f&uuml;r die Testdaten der in Punkt 2 erstellten Tabellen enth&auml;lt. Jede Tabelle soll
+                        zumindest drei Zeilen enthalten. Sie d&uuml;rfen die Wahl der Namen, Bezeichnungen etc.
+                        so einfach wie m&ouml;glich gestalten, d. h. Sie m&uuml;ssen nicht "real existierende" Fahrzeuge,
+                        Dienstgrade, etc. w&auml;hlen. Stattdessen k&ouml;nnen Sie auch einfach "Fahrzeug 1", "Fahrzeug
+                        2", "Mannschaft 1", "Mannschaft 2" etc. verwenden.
+                    </p>
+                </li>
+                <li>
+                    <p>Erstellen Sie eine Datei <code>drop.sql</code>, welche die n&ouml;tigen DROP-Befehle enth&auml;lt, um alle in Punkt 2 erzeugten Datenbankobjekte wieder zu l&ouml;schen. Das Schl&uuml;sselwort CASCADE darf dabei <strong>NICHT</strong> verwendet werden.</p>
+                </li>
+                <li>
+                    <p>
+                        Erstellen Sie eine Datei <code>create-plpgsql.sql</code>, welche den Code f&uuml;r die
+                        beiden Trigger, die Funktion <code>f_bonus</code> und die Prozedur <code>p_erhoehe_dienstgrad</code>
+                        enth&auml;lt.</p>
+                </li>
+                <li>
+                    <p>
+						&Uuml;berlegen Sie sich eine sinnvolle Testabdeckung f&uuml;r die PL/pgSQL-Programmteile laut
+                        Punkt 5, z.B.: Erweiterung der Testdaten, Aufruf der zu testenden PL/pgSQL-Programmteile mit entsprechenden Ausgaben, so dass sich die erfolgreiche Durchf&uuml;hrung der Tests
+                        &uuml;berpr&uuml;fen l&auml;sst. Denken Sie auch an negative Tests, welche mit einer Exception
+                        enden sollen, z.B. Aufruf der Funktion <code>f_bonus</code> mit einer falschen ID.
+					</p>
+					<p>
+                        Stellen Sie in Ihrem ZIP-Archiv die SQL-Dateien mit den zus&auml;tzlichen INSERT-Befehlen
+                        und den "Testtreibern" in der Datei <code>test-plpgsql.sql</code> bereit. Sie m&uuml;ssen in
+                        der Lage sein, diese SQL-Dateien und PL/pgSQL-Dateien im Rahmen des Abgabegespr&auml;chs
+                        ablaufen zu lassen.
+                    </p>
+                </li>
+                <li>
+                    <p>Erstellen Sie eine Datei <code>drop-plpgsql.sql</code>, welche die n&ouml;tigen DROP-Befehle enth&auml;lt, um alle in Punkt 5 erzeugten Datenbankobjekte wieder zu l&ouml;schen.</p>
+                </li>
+                <li>
+                    <p>
+                        Stellen Sie in Ihrem Abgabearchiv eine Listing-Datei mit dem Namen <code>listing.txt</code>
+                        bereit, die Sie bei der Ausf&uuml;hrung der SQL-Dateien erzeugt haben. Diese Datei soll
+                        alle Informationen beinhalten, die beim Ablauf der Dateien <code>create.sql, insert.sql, drop.sql, create-plpgsql.sql, test-plpgsql.sql</code> und <code>drop-plpgsql.sql</code> erzeugt werden.
+                        Beachten Sie dazu bitte die Hinweise zur Ben&uuml;tzung von psql am Ende dieses Dokuments.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Im Rahmen des Abgabegespr&auml;chs m&uuml;ssen Sie in der Lage sein, alle von Ihnen in der
+                        Abgabe bereitgestellten Dateien erkl&auml;ren zu k&ouml;nnen. Weiters wird erwartet, dass
+                        Sie auch das ER-Diagramm einwandfrei analysieren k&ouml;nnen, auch wenn es in diesem
+                        Semester bereits vorgegeben wurde. Bitte achten Sie auch darauf, dass sich alle
+                        von Ihnen abgegebenen Dateien auf dem bordo-Server ausf&uuml;hren lassen, um Probleme
+                        (und m&ouml;glicherweise daraus resultierenden Punktabzug) zu vermeiden.</p>
+                </li>
+            </ol>
+            <h2>Abgabe</h2>
+            <p>
+                Ingesamt sind folgende Dateien abzugeben:
+                <ul>
+                    <li><code>create.sql</code></li>
+                    <li><code>insert.sql</code></li>
+                    <li><code>drop.sql</code></li>
+                    <li><code>create-plpgsql.sql</code></li>
+                    <li><code>test-plpgsql.sql</code></li>
+                    <li><code>drop-plpgsql.sql</code></li>
+                    <li><code>listing.txt</code></li>
+                </ul>
+            </p>
+            <p>
+                Die angegebenen Dateien sind in einer ZIP-Datei <code>beispiel2.zip</code> bis
+                sp&auml;testens <strong>04.11.2012</strong> um <strong>23:59</strong> im CourseManager
+                abzugeben. Es wird stets die zuletzt hochgeladene Version Ihrer L&ouml;sung gewertet.
+            </p>
+			<p>
+                Achten Sie darauf, dass der Name jeder dieser abzugebenden Dateien so lautet wie oben
+                angegeben. Erstellen Sie <strong>KEINE</strong> Ordner innerhalb der ZIP-Datei.
+            </p>
+            <h3>Abgabegespr&auml;che</h3>
+            <p>
+                Die Verteilung der Punkte erfolgt nach folgendem Schl&uuml;ssel:
+                <ul>
+                    <li>SQL Teil (<code>create.sql</code>, <code>insert.sql</code>, <code>drop.sql</code>): max. 5 Punkte</li>
+                    <li>PL/pgSQL Teil (<code>create-plpgsql.sql</code>, <code>test-plpgsql.sql</code>, <code>drop-plpgsql.sql</code>): max. 5 Punkte</li>
+                    <li><code>listing.txt</code>: Vorhandensein f&uuml;r das Erreichen der vollen Punkteanzahl
+                        notwendig </code></li>
+                </ul>
+            </p>
+            <p>
+                Im Rahmen des Kontrollgespr&auml;ches wird nicht nur die Korrektheit, sondern vor allem
+                das Verst&auml;ndnis der Konzepte &uuml;berpr&uuml;ft. Durch die &Uuml;bung sollen sowohl Ihre praktische
+                Probleml&ouml;sungskompetenz als auch das theoretische Wissen &uuml;ber Datenbanksysteme gef&ouml;rdert
+                werden. Sie m&uuml;ssen daher bei den Abgabegespr&auml;chen in der Lage sein, nicht nur Ihre
+                Beispiele zu erkl&auml;ren, sondern ebenfalls zeigen, dass Sie die bisher in der Vorlesung
+                behandelte Theorie zu diesen Beispielen ausreichend verstanden haben. Dies soll
+                Ihnen die Vorbereitung f&uuml;r die Pr&uuml;fung erleichtern und so k&ouml;nnen Sie Ihr Wissen
+                w&auml;hrend der Abgabegespr&auml;che selbst testen und gegebenenfalls vertiefen.
+            </p>
+            <p>
+                Die volle Punktezahl gibt es nur, wenn die Beispiele korrekt gel&ouml;st wurden und die
+                L&ouml;sung einwandfrei erkl&auml;rt werden kann. Nicht selbstst&auml;ndig gel&ouml;ste Abgaben werden
+                mit 0 Punkten bewertet!
+            </p>
+            <p>
+                Erscheinen Sie in Ihrem eigenen Interesse <strong>p&uuml;nktlich</strong> zum Abgabegespr&auml;ch,
+
+                da andernfalls nicht garantiert werden kann, dass Ihre gesamte L&ouml;sung in der verbleibenden
+                Zeit beurteilt werden kann.</p>
+            <p>
+                Bringen Sie bitte Ihren Studentenausweis zur Abgabe mit. Eine Abgabe ohne Ausweis
+                ist nicht m&ouml;glich.</p>
+            <h3>
+                Hinweise zur Verwendung von psql</h3>
+            <p>
+                Folgende Befehle k&ouml;nnen f&uuml;r Ihre Arbeit mit der interaktiven SQL-Shell psql von
+                PostgreSQL 9.1 hilfreich sein:</p>
+            <ul>
+                <li><code>\?</code>: Listet alle psql-internen Befehle samt Erkl&auml;rung auf.</li>
+                <li><code>\i &lt;dateiname&gt;</code>: F&uuml;hrt das Skript <code>&lt;dateiname&gt;</code>
+                    aus. Beispiel: <code>\i create.sql</code></li>
+                <li><code>\o &lt;dateiname&gt;</code>: Lenkt die Ausgabe in eine Datei mit dem Namen
+                    <code>&lt;dateiname&gt;</code> um. L&auml;sst man den Parameter <code>&lt;dateiname&gt;</code>
+                    weg, so wird dieses Verhalten wieder abgestellt. Beispiel: <code>\o listing.txt</code></li>
+            </ul>
+
+
+	<!-- CONTENT END -->
+	<div style="text-align:right;">
+		
+    <!--Letzte &Auml;nderung: 2012-08-30 11:20-->
+      	</div>	
+      </div>
+
+<div id="tucsFooter">
+     <hr class="tucsSkip" />
+     <p><a href="/">Home</a> / 
+     <a href="/address/">Kontakt</a> /
+     <a href="mailto:webmaster@dbai.tuwien.ac.at">Webmaster</a> / 
+     Offenlegung gem&auml;&szlig; &sect; 25 Mediengesetz: Inhaber der Website ist das
+     Institut f&uuml;r Informationssysteme an der Technischen Universit&auml;t Wien,
+     1040 Wien. Die TU Wien distanziert sich von den Inhalten aller
+     extern gelinkten Seiten und &uuml;bernimmt diesbez&uuml;glich keine Haftung. /
+     <a href="http://www.tuwien.ac.at/impressum/disclaimer/"
+        onclick="javascript:window.open('http://www.tuwien.ac.at/impressum/disclaimer/','d','width=680,height=500,scrollbars'); return false">Disclaimer</a>.
+     </p>
+</div>
+
+
+
+      <a name="bottom"></a>
+    </div>
+  </body>
+</html>
